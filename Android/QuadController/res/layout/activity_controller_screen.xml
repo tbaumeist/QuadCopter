@@ -1,0 +1,106 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_overlay"
+    tools:context="com.tbaumeist.quadcontroller.ControllerScreen" >
+
+    <!--
+         The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc.
+    -->
+
+
+    <!--
+         This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows.
+    -->
+
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="0.40" >
+
+                <Switch
+                    android:id="@+id/switchArm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textOff="@string/switch_disarmed"
+                    android:textOn="@string/switch_armed" />
+
+            </LinearLayout>
+
+            <com.tbaumeist.quadcontroller.widget.Status
+                android:id="@+id/showStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.20" />
+
+            <Switch
+                android:id="@+id/switchStart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="0.40"
+                android:checked="false"
+                android:enabled="false"
+                android:textOff="@string/switch_stop"
+                android:textOn="@string/switch_start" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+       
+            <com.tbaumeist.quadcontroller.widget.JoystickView
+                android:id="@+id/joystickLeft"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.40" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.20"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/button_settings"
+                    style="@style/ButtonBar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="32dp"
+                    android:text="@string/dummy_button" />
+
+                <TextView
+                    android:id="@+id/textViewDebug"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+            <com.tbaumeist.quadcontroller.widget.JoystickView
+                    android:id="@+id/joystickRight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" 
+                    android:layout_weight="0.40" />
+
+        </TableRow>
+    </LinearLayout>
+
+</FrameLayout>

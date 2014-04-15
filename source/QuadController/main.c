@@ -98,8 +98,8 @@ void initializeQuadCopter() {
 	Timer_Start(1, onTimerChangeChannel);
 	__bis_SR_register(CPUOFF + GIE);
 
-	if (!commChannelChanged){
-		TXString("ERROR: negotiating comm channel\n",32);
+	if (!commChannelChanged) {
+		TXString("ERROR: negotiating comm channel\n", 32);
 		return;
 	}
 
@@ -151,7 +151,7 @@ bool callback_UserCommand(char* text, int size) {
 	if (task != UNKNOWN)
 		ToggleRedLED();
 	else
-		TXString("UNKNOWN\n",8);
+		TXString("UNKNOWN\n", 8);
 
 	return true;
 }

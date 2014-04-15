@@ -55,5 +55,55 @@
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TI_Library/Components/mrfi/mrfi_defs.h</locationURI>
 		</link>
+		<link>
+			<name>utils/BoardStats.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Common/BoardStats.c</locationURI>
+		</link>
+		<link>
+			<name>utils/BoardStats.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Common/BoardStats.h</locationURI>
+		</link>
+		<link>
+			<name>utils/LEDController.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Common/LEDController.c</locationURI>
+		</link>
+		<link>
+			<name>utils/LEDController.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Common/LEDController.h</locationURI>
+		</link>
+		<link>
+			<name>utils/Timer.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Common/Timer.c</locationURI>
+		</link>
+		<link>
+			<name>utils/Timer.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Common/Timer.h</locationURI>
+		</link>
+		<link>
+			<name>utils/UserButton.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Common/UserButton.c</locationURI>
+		</link>
+		<link>
+			<name>utils/UserButton.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Common/UserButton.h</locationURI>
+		</link>
+		<link>
+			<name>utils/VirtualComCmds.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Common/VirtualComCmds.c</locationURI>
+		</link>
+		<link>
+			<name>utils/VirtualComCmds.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Common/VirtualComCmds.h</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

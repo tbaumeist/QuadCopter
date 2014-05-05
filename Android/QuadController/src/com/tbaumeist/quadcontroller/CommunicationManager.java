@@ -1,14 +1,14 @@
 package com.tbaumeist.quadcontroller;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import com.hoho.android.usbserial.driver.UsbSerialDriver;
 
 import android.os.Handler;
 
 public class CommunicationManager {
-
+	
 	private int leftX, leftY, rightX, rightY;
 
 	private final int DELAY = 1000;
@@ -21,21 +21,18 @@ public class CommunicationManager {
 			if(stopTimer)
 				return;
 			try {
-				mOutputStream.write(new String(getCommString()).getBytes());
-				mOutputStream.write('\n');
+				mUsbDriver.write(new String(getCommString()).getBytes(), 0);
 			} catch (IOException e) {
-				e.printStackTrace();
+				listener.OnError(e.getMessage());
 			}
 			timerHandler.postDelayed(this, DELAY);
 		}
 	};
 
-	private SerialPort serialPort;
-	protected OutputStream mOutputStream;
-	private InputStream mInputStream;
+	private UsbSerialDriver mUsbDriver;
 	private ReadThread mReadThread;
 	private CommunicationManagerListener listener;
-
+	
 	private class ReadThread extends Thread {
 		@Override
 		public void run() {
@@ -44,14 +41,16 @@ public class CommunicationManager {
 				int size;
 				try {
 					byte[] buffer = new byte[64];
-					if (mInputStream == null)
+					if (mUsbDriver == null)
 						return;
-					size = mInputStream.read(buffer);
+					size = mUsbDriver.read(buffer, 0);
 					if (size > 0) {
-						listener.OnMessageReceived(buffer, size);
+						byte[] buf = new byte[size];
+						System.arraycopy(buffer, 0, buf, 0, size);
+						listener.OnMessageReceived(buf);
 					}
 				} catch (IOException e) {
-					e.printStackTrace();
+					listener.OnError(e.getMessage());
 					return;
 				}
 			}
@@ -60,10 +59,10 @@ public class CommunicationManager {
 
 	private ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
 
-	public CommunicationManager(SerialPort port,
-			CommunicationManagerListener listen) {
+	public CommunicationManager(UsbSerialDriver driver,
+			CommunicationManagerListener listen)  {
 		this.listener = listen;
-		this.serialPort = port;
+		this.mUsbDriver = driver;
 	}
 
 	public void setLeft(int x, int y) {
@@ -88,18 +87,22 @@ public class CommunicationManager {
 		int lY = leftY;
 		lock.readLock().unlock();
 
-		return "AB";
+		return "AB\n";
 	}
 
 	public void initializeComm() {
 		Thread t = new Thread() {
 			public void run() {
-				// TODO: init comm with quad-copter
-
 				try {
-					sleep(4000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+					mUsbDriver.open();
+					mUsbDriver.setDTR(false);
+					mUsbDriver.setRTS(false);
+					mUsbDriver.setParameters(9600, 8, UsbSerialDriver.STOPBITS_1, UsbSerialDriver.PARITY_NONE);
+					mUsbDriver.setDTR(true);
+					mUsbDriver.setRTS(true);
+				} catch (IOException e) {
+					listener.OnError(e.getMessage());
+					return;
 				}
 				listener.OnInitializedFinished();
 			}
@@ -108,9 +111,6 @@ public class CommunicationManager {
 	}
 
 	public void startComm() {
-		mOutputStream = serialPort.getOutputStream();
-		mInputStream = serialPort.getInputStream();
-
 		/* Create a receiving thread */
 		mReadThread = new ReadThread();
 		mReadThread.start();

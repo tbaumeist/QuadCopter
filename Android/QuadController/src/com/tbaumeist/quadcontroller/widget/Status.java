@@ -50,6 +50,11 @@ public class Status extends LinearLayout {
 			init(context);
 	}
 	
+	public void setStatusNoGo(){
+		statusText.setText(R.string.status_nogo);
+		setCurrentImage(R.drawable.black);
+	}
+	
 	public void setStatusNotReady(){
 		statusText.setText(R.string.status_notready);
 		setCurrentImage(R.drawable.red);

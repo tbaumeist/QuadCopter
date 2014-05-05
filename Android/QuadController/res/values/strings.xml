@@ -2,12 +2,13 @@
 <resources>
 
     <string name="app_name">Quad Controller</string>
-    <string name="dummy_button">Settings</string>
+    <string name="dummy_button">Find USB</string>
     <string name="switch_arm">Arm</string>
     <string name="switch_armed">Armed</string>
     <string name="switch_disarmed">Disarmed</string>
     <string name="switch_start">Started</string>
     <string name="switch_stop">Stopped</string>
+    <string name="status_nogo">No USB</string>
     <string name="status_notready">Off</string>
     <string name="status_gettingready">Loading</string>
     <string name="status_almostready">Ready</string>
@@ -17,5 +18,6 @@
 		port.</string>
     <string name="error_unknown">The serial port can not be opened for an unknown
 		reason.</string>
-
+	<string name="error_no_device">Unable to find the usb device.</string>
+		
 </resources>
